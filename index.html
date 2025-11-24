@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Africa-Wide Green Building Research Challenge 1.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Africa-Wide Green Building Research Challenge 1.0 — a pan-African sustainable design and research Challenge for students and built-environment professionals."
+  />
+
+  <style>
+    :root {
+      --bg-page: #0b0b0b;
+      --bg-section: #ffffff;
+      --accent: #0f766e;
+      --accent-soft: #e0f2f1;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-soft: #e5e7eb;
+      --radius: 14px;
+      --max-width: 960px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #0b0b0b;
+    }
+
+    /* ========== TOP NAV (BLACK) ========== */
+
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.96);
+      color: #f9fafb;
+      display: flex;
+      align-items: center;
+      z-index: 40;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .top-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      font-size: 11px;              /* smaller so everything fits */
+      font-weight: 600;
+      letter-spacing: 0.14em;       /* slightly tighter tracking */
+      text-transform: uppercase;
+      white-space: nowrap;          /* keep on one line */
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;                    /* reduced gap so items fit */
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 2px;
+      white-space: nowrap;          /* prevents HOW IT WORKS from breaking */
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: #ffffff;
+      transition: width 0.2s ease-out;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      white-space: nowrap;          /* keep both buttons on one line */
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .btn-outline-light {
+      border-color: rgba(249, 250, 251, 0.75);
+      color: #e5e7eb;
+      background: transparent;
+    }
+
+    .btn-outline-light:hover {
+      background: rgba(249, 250, 251, 0.12);
+    }
+
+    .btn-light-solid {
+      background: #f9fafb;
+      color: #111827;
+      border-color: #f9fafb;
+      font-weight: 600;
+    }
+
+    .btn-light-solid:hover {
+      background: #e5e7eb;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-logo {
+        font-size: 10px;
+        letter-spacing: 0.13em;
+      }
+    }
+
+    /* ========== LEFT VERTICAL LABEL ========== */
+
+    .side-bar {
+      position: fixed;
+      top: 60px;
+      bottom: 0;
+      left: 0;
+      width: 56px;
+      background: #000000;
+      border-right: 1px solid rgba(148, 163, 184, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0 14px;
+      z-index: 30;
+    }
+
+    .side-label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .side-social {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .side-social a {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 720px) {
+      .side-bar {
+        display: none;
+      }
+    }
+
+    /* ========== HERO SECTION ========== */
+
+    .hero {
+      position: relative;
+      min-height: 65vh;
+      color: #f9fafb;
+      padding-top: 60px;
+      overflow: hidden;
+    }
+
+    .hero-bg-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .hero-bg-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-bg-slide.active {
+      opacity: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.55)
+      );
+      pointer-events: none;
+    }
+
+    .hero-content-wrapper {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 70px 40px 40px 96px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: calc(65vh - 60px);
+    }
+
+    @media (max-width: 900px) {
+      .hero-content-wrapper {
+        padding: 70px 20px 30px 20px;
+      }
+    }
+
+    .hero-kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      margin-bottom: 10px;
+      color: #a7f3d0;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      max-width: 520px;
+      color: #e5e7eb;
+      margin-bottom: 20px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 11px;
+      color: #d1d5db;
+    }
+
+    .hero-chip {
+      border-radius: 999px;
+      border: 1px solid rgba(229, 231, 235, 0.4);
+      padding: 4px 10px;
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .hero-breadcrumb {
+      position: absolute;
+      bottom: 16px;
+      right: 40px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-breadcrumb span {
+      height: 1px;
+      width: 40px;
+      background: rgba(229, 231, 235, 0.7);
+      display: inline-block;
+    }
+
+    @media (max-width: 720px) {
+      .hero-breadcrumb {
+        display: none;
+      }
+    }
+
+    /* ========== MAIN CONTENT SECTIONS ========== */
+
+    main {
+      background: #f3f4f6;
+    }
+
+    .section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 40px 16px;
+    }
+
+    .section-header {
+      margin-bottom: 16px;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #020617;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .block {
+      background: var(--bg-section);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-soft);
+      padding: 16px 14px;
+      margin-bottom: 12px;
+    }
+
+    .list {
+      margin-top: 6px;
+      margin-left: 1.25rem;
+      list-style: disc;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .list li {
+      margin-bottom: 4px;
+    }
+
+    .steps {
+      margin-top: 6px;
+      list-style: none;
+      font-size: 14px;
+      color: var(--text-muted);
+      padding-left: 0;
+    }
+
+    .steps li {
+      padding-left: 26px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .steps li::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 0;
+      top: 1px;
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .faq-item {
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 10px;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    .faq-a {
+      display: none;
+      margin-top: 6px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .faq-item.open .faq-a {
+      display: block;
+    }
+
+    .faq-toggle {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 12px 16px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <div class="nav-logo">GBC 1.0</div>
+
+      <div class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#how">How it works</a>
+        <a href="#submit">Submission</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4-fOvtSdAZ45oNHX8za-fmLZgZED7hl5xLLjkpW4qYw3fIw/viewform?usp=dialog"
+           class="btn btn-outline-light">
+          Register
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdHMxNfy3zRm5eXkuGfqJaHqYmKEEdCMt3StFebbHDoPtj-pA/viewform?usp=publish-editor"
+           class="btn btn-light-solid">
+          Submit project
+        </a>
+        <a href=""
+           class="btn btn-light-solid">
+          feedback
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- LEFT SIDE LABEL -->
+  <aside class="side-bar">
+    <div class="side-label">
+      AFRICA-WIDE · GREEN BUILDING CHALLENGE 1.0
+    </div>
+    <div class="side-social">
+      <a href="#">Fb</a>
+      <a href="#">Tw</a>
+      <a href="#">Ig</a>
+    </div>
+  </aside>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-slide">
+      <img src="slide5.jpg" alt="Hero image 5">
+    </div>
+    <div class="hero-bg-slide active">
+      <img src="slide1.jpg" alt="Hero image 1">
+    </div>
+    <div class="hero-bg-slide">
+      <img src="slide2.jpg" alt="Hero image 2">
+    </div>
+    <div class="hero-bg-slide">
+      <img src="slide4.jpg" alt="Hero image 4">
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content-wrapper">
+      <div class="hero-kicker">AFRICA · SUSTAINABLE DESIGN</div>
+      <h1 class="hero-title">Africa-Wide Green Building<br>Research Challenge 2026</h1>
+
+      <p class="hero-subtitle">
+        A pan-African green building design and research challenge inviting students, young professionals,
+        and built-environment practitioners to develop climate-responsive, human-centred and resource-efficient
+        buildings tailored to Africa’s diverse contexts.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4-fOvtSdAZ45oNHX8za-fmLZgZED7hl5xLLjkpW4qYw3fIw/viewform?usp=dialog"
+           class="btn btn-light-solid">Register now</a>
+        <a href="#submit" class="btn btn-outline-light">View submission requirements</a>
+      </div>
+
+      <div class="hero-meta">
+        <span class="hero-chip">Open to all African countries</span>
+        <span class="hero-chip">Students & professionals</span>
+        <span class="hero-chip">Focus: energy · water · materials</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+
+      <div class="section-header">
+        <div class="section-eyebrow">ABOUT</div>
+        <h2 class="section-title">Africa-Wide Green Building Research Challenge 2026</h2>
+
+        <p class="section-desc">
+          The Africa-Wide Green Building Research Challenge 2026 is a continent-spanning design and research 
+          initiative organised by <b>Cadright Global Research Cell (CGRC)</b> in collaboration with the 
+          <b>School of Architecture, Nnamdi Azikiwe University, Awka</b>.
+          <br><br>
+          This challenge brings together students, early-career professionals, established practitioners and experts 
+          across the built environment to explore innovative, climate-responsive and resource-efficient design 
+          solutions tailored to Africa’s diverse contexts.
+          <br><br>
+          Unlike conventional concept competitions, this is a research-driven and practice-oriented platform. 
+          Participants are encouraged to investigate local climate realities, social and cultural needs, material 
+          availability, affordability constraints, and on-the-ground sustainability challenges – then translate their 
+          findings into feasible, high-impact green building proposals.
+          <br><br>
+          Through this challenge, participants will explore:
+        </p>
+
+        <ul class="list" style="margin-top: 10px;">
+          <li>Passive and active climate-smart design strategies suited to African climates</li>
+          <li>Human-centred design that responds to people, place and community</li>
+          <li>Low-carbon, affordable and context-appropriate material choices</li>
+          <li>Practical solutions for Africa’s evolving built environment, grounded in research</li>
+        </ul>
+
+        <p class="section-desc" style="margin-top: 12px;">
+          Although this competition is not centred on EDGE, however, to ensure fair and transparent evaluation, submissions will be 
+          assessed using three performance pillars commonly applied in green building practice:
+          <b>energy performance</b>, <b>water efficiency</b> and <b>material resource optimisation</b>. 
+        </p>
+
+      </div>
+
+      <div class="block">
+        <h2>Who can participate?</h2>
+        <ul class="list">
+          <li>Architecture, engineering and built-environment students.</li>
+          <li>Recent graduates and young professionals.</li>
+          <li>Self-taught learners and career-switchers interested in sustainable buildings.</li>
+        </ul>
+        <p style="margin-top:6px;font-size:13px;color:var(--text-muted);">
+          You do not need to be an expert. Curiosity, effort and clear thinking are enough.
+        </p>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS / PROCESS -->
+    <section class="section" id="how">
+      <div class="section-header">
+        <div class="section-eyebrow">PROCESS</div>
+        <h2 class="section-title">How the challenge works.</h2>
+      </div>
+
+      <div class="block">
+        <h2>Three simple steps</h2>
+        <ol class="steps">
+          <li data-step="1">
+            <b>Register</b><br>
+            Complete the online registration form.
+          </li>
+          <li data-step="2">
+            <b>Develop your design</b><br>
+            Prepare the following:
+            <ul class="list">
+              <li>Architectural drawings (plans, sections, elevations)</li>
+              <li>Performance calculations (energy, water, materials)</li>
+              <li>Sustainability explanation (1–2 pages)</li>
+              <li>3D images or renderings</li>
+            </ul>
+          </li>
+          <li data-step="3">
+            <b>Submit your files</b><br>
+            Upload all required documents before the deadline using the submission form.
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- WHAT TO SUBMIT -->
+    <section class="section" id="submit">
+      <div class="section-header">
+        <div class="section-eyebrow">SUBMISSION</div>
+        <h2 class="section-title">What you will submit.</h2>
+        <p class="section-desc">
+          The submission form uses multiple upload fields for clearer, more organised review by the jury.
+        </p>
+      </div>
+
+      <div class="block">
+        <h2>Required files</h2>
+        <ul class="list">
+          <li><b>Performance calculations file</b> – showing your design’s projected <b>energy</b>, <b>water</b>, and <b>material</b> efficiency outcomes (Excel, CSV or calculation sheet).</li>
+          <li><b>Environmental performance summary (PDF)</b> – a concise summary highlighting the sustainability indicators of your project.</li>
+          <li><b>Architectural drawings</b> – plans, sections, elevations.</li>
+          <li><b>Sustainability explanation</b> – 1–2 pages outlining your key strategies.</li>
+          <li><b>3D images or renderings</b> – visualising your final design.</li>
+          <li><b>Optional files</b> – climate diagrams, simulations, or any supporting research.</li>
+        </ul>
+      </div>
+
+      <div class="block" style="text-align:center;">
+        <p style="font-size:14px;color:var(--text-muted); margin-bottom:8px;">
+          When your files are ready, upload them using the form below.
+        </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdHMxNfy3zRm5eXkuGfqJaHqYmKEEdCMt3StFebbHDoPtj-pA/viewform?usp=publish-editor"
+           class="btn btn-light-solid">Go to submission form</a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="section-header">
+        <div class="section-eyebrow">FAQ</div>
+        <h2 class="section-title">Quick questions.</h2>
+        <p class="section-desc">Tap to expand.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Do I need advanced software?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">
+          No. Any design tool you are comfortable with is fine as long as the drawings and images are clear.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Can I join as a team?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">
+          Yes. Teams and individuals are both welcome. Only one person should submit on behalf of a team.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Can I update my submission?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">
+          Contact the organisers if you need to revise your submission after sending it.
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="section-header">
+        <div class="section-eyebrow">SUPPORT</div>
+        <h2 class="section-title">Contact & data use.</h2>
+      </div>
+
+      <div class="block">
+        <p style="font-size:14px;color:var(--text-muted);">
+          Participation is voluntary. Data collected in the registration and submission forms will be used only for
+          administering and evaluating the challenge. It will not be sold or shared with third parties without your consent.
+        </p>
+        <p style="margin-top:6px;font-size:14px;color:var(--text-muted);">
+          For enquiries, email:
+          <a href="mailto:research@cadrightglobalresources.com" style="color:var(--accent);text-decoration:underline;">research@cadrightglobalresources.com</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Africa-Wide Green Building Research Challenge 1.0 · All Rights Reserved
+  </footer>
+
+</div>
+
+<script>
+  // FAQ toggle
+  document.querySelectorAll(".faq-item").forEach(item => {
+    item.addEventListener("click", () => {
+      item.classList.toggle("open");
+      const toggle = item.querySelector(".faq-toggle");
+      if (toggle) {
+        toggle.textContent = item.classList.contains("open") ? "–" : "+";
+      }
+    });
+  });
+
+  // HERO background slider
+  const heroSlides = document.querySelectorAll(".hero-bg-slide");
+  let currentHero = 0;
+
+  function nextHeroSlide() {
+    if (heroSlides.length === 0) return;
+    heroSlides[currentHero].classList.remove("active");
+    currentHero = (currentHero + 1) % heroSlides.length;
+    heroSlides[currentHero].classList.add("active");
+  }
+
+  setInterval(nextHeroSlide, 7000);
+</script>
+
+</body>
+</html>
