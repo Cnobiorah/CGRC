@@ -45,7 +45,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background: #0b0b0b;
+      background: #f3f4f6;
     }
 
     /* ========== TOP NAV (BLACK) ========== */
@@ -76,16 +76,16 @@
     }
 
     .nav-logo {
-      font-size: 11px;              /* smaller so everything fits */
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.14em;       /* slightly tighter tracking */
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      white-space: nowrap;          /* keep on one line */
+      white-space: nowrap;
     }
 
     .nav-links {
       display: flex;
-      gap: 18px;                    /* reduced gap so items fit */
+      gap: 18px;
       font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
@@ -94,7 +94,7 @@
     .nav-links a {
       position: relative;
       padding-bottom: 2px;
-      white-space: nowrap;          /* prevents HOW IT WORKS from breaking */
+      white-space: nowrap;
     }
 
     .nav-links a::after {
@@ -116,7 +116,7 @@
       display: flex;
       gap: 10px;
       align-items: center;
-      white-space: nowrap;          /* keep both buttons on one line */
+      white-space: nowrap;
     }
 
     .btn {
@@ -164,57 +164,13 @@
       }
     }
 
-    /* ========== LEFT VERTICAL LABEL ========== */
-
-    .side-bar {
-      position: fixed;
-      top: 60px;
-      bottom: 0;
-      left: 0;
-      width: 56px;
-      background: #000000;
-      border-right: 1px solid rgba(148, 163, 184, 0.2);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0 14px;
-      z-index: 30;
-    }
-
-    .side-label {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #e5e7eb;
-    }
-
-    .side-social {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .side-social a {
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    @media (max-width: 720px) {
-      .side-bar {
-        display: none;
-      }
-    }
-
-    /* ========== HERO SECTION ========== */
+    /* ========== HERO SECTION (FULL-WIDTH) ========== */
 
     .hero {
       position: relative;
       min-height: 65vh;
       color: #f9fafb;
-      padding-top: 60px;
+      padding-top: 60px; /* offset for fixed nav */
       overflow: hidden;
     }
 
@@ -252,7 +208,7 @@
       position: relative;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 70px 40px 40px 96px;
+      padding: 70px 40px 40px 40px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -334,6 +290,140 @@
     @media (max-width: 720px) {
       .hero-breadcrumb {
         display: none;
+      }
+    }
+
+    /* ========== 3-COLUMN LAYOUT (BELOW HERO) ========== */
+
+    .page-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+      display: grid;
+      /* left, main, right columns all sized properly */
+      grid-template-columns: 240px minmax(0, 1fr) 240px;
+      gap: 16px;
+      background: #f3f4f6;
+    }
+
+    @media (max-width: 960px) {
+      .page-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* LEFT SIDEBAR – full box, fits column */
+    .side-bar {
+      width: 100%;                  /* fill the 240px column */
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-self: flex-start;
+    }
+
+    .sidebar-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #4b5563;
+    }
+
+    .side-social {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .side-social a {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    /* RIGHT SIDEBAR – Book ads, same box style */
+    .right-adbar {
+      width: 100%;                  /* fill the 240px column */
+      background: #ffffff;
+      border: 1px solid #e5e7eb;    /* full border (not just left) */
+      border-radius: 10px;
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-self: flex-start;
+    }
+
+    .right-adbar .sidebar-title {
+      margin-bottom: 4px;
+    }
+
+    .ad-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .ad-item {
+      text-align: center;
+    }
+
+    .ad-item img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .ad-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .ad-desc {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .ad-price {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .ad-btn {
+      display: inline-block;
+      background: #facc15;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .ad-btn:hover {
+      background: #eab308;
+    }
+
+    .ad-divider {
+      height: 1px;
+      background: #e5e7eb;
+    }
+
+    @media (max-width: 960px) {
+      .side-bar,
+      .right-adbar {
+        width: 100%;
+        border: none;
+        padding: 12px 10px;
       }
     }
 
@@ -500,19 +590,7 @@
     </div>
   </nav>
 
-  <!-- LEFT SIDE LABEL -->
-  <aside class="side-bar">
-    <div class="side-label">
-      AFRICA-WIDE · GREEN BUILDING CHALLENGE 1.0
-    </div>
-    <div class="side-social">
-      <a href="#">Fb</a>
-      <a href="#">Tw</a>
-      <a href="#">Ig</a>
-    </div>
-  </aside>
-
-  <!-- HERO -->
+  <!-- HERO (full width) -->
   <section class="hero" id="hero">
     <div class="hero-bg-slide">
       <img src="slide5.jpg" alt="Hero image 5">
@@ -553,183 +631,286 @@
     </div>
   </section>
 
-  <!-- MAIN -->
-  <main>
+  <!-- 3-COLUMN LAYOUT: LEFT | MAIN | RIGHT -->
+  <div class="page-layout">
 
-    <!-- ABOUT -->
-    <section class="section" id="about">
+    <!-- LEFT SIDEBAR – EXACT SAME STRUCTURE AS RIGHT -->
+    <aside class="side-bar">
+      <div class="sidebar-title">Publications</div>
 
-      <div class="section-header">
-        <div class="section-eyebrow">ABOUT</div>
-        <h2 class="section-title">Africa-Wide Green Building Research Challenge 2026</h2>
+      <div class="ad-list">
 
-        <p class="section-desc">
-          The Africa-Wide Green Building Research Challenge 2026 is a continent-spanning design and research 
-          initiative organised by <b>Cadright Global Research Cell (CGRC)</b> in collaboration with the 
-          <b>School of Architecture, Nnamdi Azikiwe University, Awka</b>.
-          <br><br>
-          This challenge brings together students, early-career professionals, established practitioners and experts 
-          across the built environment to explore innovative, climate-responsive and resource-efficient design 
-          solutions tailored to Africa’s diverse contexts.
-          <br><br>
-          Unlike conventional concept competitions, this is a research-driven and practice-oriented platform. 
-          Participants are encouraged to investigate local climate realities, social and cultural needs, material 
-          availability, affordability constraints, and on-the-ground sustainability challenges, then translate their 
-          findings into feasible, high-impact green building proposals.
-          <br><br>
-          Through this challenge, participants will explore:
-        </p>
-
-        <ul class="list" style="margin-top: 10px;">
-          <li>Passive and active climate-smart design strategies suited to African climates</li>
-          <li>Human-centred design that responds to people, place and community</li>
-          <li>Low-carbon, affordable and context-appropriate material choices</li>
-          <li>Practical solutions for Africa’s evolving built environment, grounded in research</li>
-        </ul>
-
-        <p class="section-desc" style="margin-top: 12px;">
-          Although this competition is not centred on EDGE, however, to ensure fair and transparent evaluation, submissions will be 
-          assessed using three performance pillars commonly applied in green building practice:
-          <b>energy performance</b>, <b>water efficiency</b> and <b>material resource optimisation</b>. 
-        </p>
-
-      </div>
-
-      <div class="block">
-        <h2>Who can participate?</h2>
-        <ul class="list">
-          <li>Architecture, engineering and built-environment students.</li>
-          <li>Recent graduates and young professionals.</li>
-          <li>Self-taught learners and career-switchers interested in sustainable buildings.</li>
-        </ul>
-        <p style="margin-top:6px;font-size:13px;color:var(--text-muted);">
-          You do not need to be an expert. Curiosity, effort and clear thinking are enough.
-        </p>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS / PROCESS -->
-    <section class="section" id="how">
-      <div class="section-header">
-        <div class="section-eyebrow">PROCESS</div>
-        <h2 class="section-title">How the challenge works.</h2>
-      </div>
-
-      <div class="block">
-        <h2>Three simple steps</h2>
-        <ol class="steps">
-          <li data-step="1">
-            <b>Register</b><br>
-            Complete the online registration form.
-          </li>
-          <li data-step="2">
-            <b>Develop your design</b><br>
-            Prepare the following:
-            <ul class="list">
-              <li>Architectural drawings (plans, sections, elevations)</li>
-              <li>Performance calculations (energy, water, materials)</li>
-              <li>Sustainability explanation (1–2 pages)</li>
-              <li>3D images or renderings</li>
-            </ul>
-          </li>
-          <li data-step="3">
-            <b>Submit your files</b><br>
-            Upload all required documents before the deadline using the submission form.
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- WHAT TO SUBMIT -->
-    <section class="section" id="submit">
-      <div class="section-header">
-        <div class="section-eyebrow">SUBMISSION</div>
-        <h2 class="section-title">What you will submit.</h2>
-        <p class="section-desc">
-          The submission form uses multiple upload fields for clearer, more organised review by the jury.
-        </p>
-      </div>
-
-      <div class="block">
-        <h2>Required files</h2>
-        <ul class="list">
-          <li><b>Performance calculations file</b> – showing your design’s projected <b>energy</b>, <b>water</b>, and <b>material</b> efficiency outcomes (Excel, CSV or calculation sheet).</li>
-          <li><b>Environmental performance summary (PDF)</b> – a concise summary highlighting the sustainability indicators of your project.</li>
-          <li><b>Architectural drawings</b> – plans, sections, elevations.</li>
-          <li><b>Sustainability explanation</b> – 1–2 pages outlining your key strategies.</li>
-          <li><b>3D images or renderings</b> – visualising your final design.</li>
-          <li><b>Optional files</b> – climate diagrams, simulations, or any supporting research.</li>
-        </ul>
-      </div>
-
-      <div class="block" style="text-align:center;">
-        <p style="font-size:14px;color:var(--text-muted); margin-bottom:8px;">
-          When your files are ready, upload them using the form below.
-        </p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdHMxNfy3zRm5eXkuGfqJaHqYmKEEdCMt3StFebbHDoPtj-pA/viewform?usp=publish-editor"
-           class="btn btn-light-solid">Go to submission form</a>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section" id="faq">
-      <div class="section-header">
-        <div class="section-eyebrow">FAQ</div>
-        <h2 class="section-title">Quick questions.</h2>
-        <p class="section-desc">Tap to expand.</p>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">
-          <span>Do I need advanced software?</span>
-          <span class="faq-toggle">+</span>
+        <!-- AD 1 -->
+        <div class="ad-item">
+          <img src="book4.jpg" alt="Green Skill Insligt Publication 1">
+          <div class="ad-title">GREEN SKILL REVOLUTION Building a workforce for the future</div>
+          <div class="ad-desc">
+           As the climate crisis intensifies and nations pursue ambitious net-zero targets, the development of green skills has emerged as a critical global priority.
+          </div>
+          
+          <a href="https://drive.google.com/file/d/12jgCjCiURK63-Cb-lFk7sGHr8qnBLr5N/view?usp=sharing" class="ad-btn">
+            Read More
+          </a>
         </div>
-        <div class="faq-a">
-          No. Any design tool you are comfortable with is fine as long as the drawings and images are clear.
-        </div>
-      </div>
 
-      <div class="faq-item">
-        <div class="faq-q">
-          <span>Can I join as a team?</span>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-a">
-          Yes. Teams and individuals are both welcome. Only one person should submit on behalf of a team.
-        </div>
-      </div>
+        <div class="ad-divider"></div>
 
-      <div class="faq-item">
-        <div class="faq-q">
-          <span>Can I update my submission?</span>
-          <span class="faq-toggle">+</span>
+         <!-- AD 2 -->
+        <div class="ad-item">
+          <img src="book5.jpg" alt="Green Skill Insligt Publication 1">
+          <div class="ad-title">GREEN SKILLS: The global priority for asustainable future</div>
+          <div class="ad-desc">
+			The economic value of green skills is undeniable. Around the world, trillions of dollars are being invested in clean energy, green buildings, and sustainable manufacturing.
+          </div>
+          
+          <a href="https://drive.google.com/file/d/12jgCjCiURK63-Cb-lFk7sGHr8qnBLr5N/view?usp=sharing" class="ad-btn">
+            Read More
+          </a>
         </div>
-        <div class="faq-a">
-          Contact the organisers if you need to revise your submission after sending it.
+		
+		<div class="ad-divider"></div>
+
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+      <!-- ABOUT -->
+      <section class="section" id="about">
+
+        <div class="section-header">
+          <div class="section-eyebrow">ABOUT</div>
+          <h2 class="section-title">Africa-Wide Green Building Research Challenge 2026</h2>
+
+          <p class="section-desc">
+            The Africa-Wide Green Building Research Challenge 2026 is a continent-spanning design and research 
+            initiative organised by <b>Cadright Global Research Cell (CGRC)</b> in collaboration with the 
+            <b>School of Architecture, Nnamdi Azikiwe University, Awka</b>.
+            <br><br>
+            This challenge brings together students, early-career professionals, established practitioners and experts 
+            across the built environment to explore innovative, climate-responsive and resource-efficient design 
+            solutions tailored to Africa’s diverse contexts.
+            <br><br>
+            Unlike conventional concept competitions, this is a research-driven and practice-oriented platform. 
+            Participants are encouraged to investigate local climate realities, social and cultural needs, material 
+            availability, affordability constraints, and on-the-ground sustainability challenges, then translate their 
+            findings into feasible, high-impact green building proposals.
+            <br><br>
+            Through this challenge, participants will explore:
+          </p>
+
+          <ul class="list" style="margin-top: 10px;">
+            <li>Passive and active climate-smart design strategies suited to African climates</li>
+            <li>Human-centred design that responds to people, place and community</li>
+            <li>Low-carbon, affordable and context-appropriate material choices</li>
+            <li>Practical solutions for Africa’s evolving built environment, grounded in research</li>
+          </ul>
+
+          <p class="section-desc" style="margin-top: 12px;">
+            Although this competition is not centred on EDGE, however, to ensure fair and transparent evaluation, submissions will be 
+            assessed using three performance pillars commonly applied in green building practice:
+            <b>energy performance</b>, <b>water efficiency</b> and <b>material resource optimisation</b>. 
+          </p>
+
         </div>
-      </div>
-    </section>
 
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="section-header">
-        <div class="section-eyebrow">SUPPORT</div>
-        <h2 class="section-title">Contact & data use.</h2>
-      </div>
+        <div class="block" style="text-align:center;">
+          <p style="font-size:14px;color:#6b7280;margin-bottom:8px;">
+            Download the full competition brief and detailed guidelines below.
+          </p>
+          <a href="Design Challenge.pdf" class="btn btn-light-solid">Download Full Competition Guide (PDF)</a>
+        </div>
 
-      <div class="block">
-        <p style="font-size:14px;color:var(--text-muted);">
-          Participation is voluntary. Data collected in the registration and submission forms will be used only for
-          administering and evaluating the challenge. It will not be sold or shared with third parties without your consent.
-        </p>
-        <p style="margin-top:6px;font-size:14px;color:var(--text-muted);">
-          For enquiries, email:
-          <a href="mailto:research@cadrightglobalresources.com" style="color:var(--accent);text-decoration:underline;">research@cadrightglobalresources.com</a>
-        </p>
-      </div>
-    </section>
+        <div class="block">
+          <h2>Who can participate?</h2>
+          <ul class="list">
+            <li>Architecture, engineering and built-environment students.</li>
+            <li>Recent graduates and young professionals.</li>
+            <li>Self-taught learners and career-switchers interested in sustainable buildings.</li>
+          </ul>
+          <p style="margin-top:6px;font-size:13px;color:var(--text-muted);">
+            You do not need to be an expert. Curiosity, effort and clear thinking are enough.
+          </p>
+        </div>
+      </section>
 
-  </main>
+      <!-- HOW IT WORKS / PROCESS -->
+      <section class="section" id="how">
+        <div class="section-header">
+          <div class="section-eyebrow">PROCESS</div>
+          <h2 class="section-title">How the challenge works.</h2>
+        </div>
+
+        <div class="block">
+          <h2>Three simple steps</h2>
+          <ol class="steps">
+            <li data-step="1">
+              <b>Register</b><br>
+              Complete the online registration form.
+            </li>
+            <li data-step="2">
+              <b>Develop your design</b><br>
+              Prepare the following:
+              <ul class="list">
+                <li>Architectural drawings (plans, sections, elevations)</li>
+                <li>Performance calculations (energy, water, materials)</li>
+                <li>Sustainability explanation (1–2 pages)</li>
+                <li>3D images or renderings</li>
+              </ul>
+            </li>
+            <li data-step="3">
+              <b>Submit your files</b><br>
+              Upload all required documents before the deadline using the submission form.
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- WHAT TO SUBMIT -->
+      <section class="section" id="submit">
+        <div class="section-header">
+          <div class="section-eyebrow">SUBMISSION</div>
+          <h2 class="section-title">What you will submit.</h2>
+          <p class="section-desc">
+            The submission form uses multiple upload fields for clearer, more organised review by the jury.
+          </p>
+        </div>
+
+        <div class="block">
+          <h2>Required files</h2>
+          <ul class="list">
+            <li><b>Performance calculations file</b> – showing your design’s projected <b>energy</b>, <b>water</b>, and <b>material</b> efficiency outcomes (Excel, CSV or calculation sheet).</li>
+            <li><b>Environmental performance summary (PDF)</b> – a concise summary highlighting the sustainability indicators of your project.</li>
+            <li><b>Architectural drawings</b> – plans, sections, elevations.</li>
+            <li><b>Sustainability explanation</b> – 1–2 pages outlining your key strategies.</li>
+            <li><b>3D images or renderings</b> – visualising your final design.</li>
+            <li><b>Optional files</b> – climate diagrams, simulations, or any supporting research.</li>
+          </ul>
+        </div>
+
+        <div class="block" style="text-align:center;">
+          <p style="font-size:14px;color:var(--text-muted); margin-bottom:8px;">
+            When your files are ready, upload them using the form below.
+          </p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdHMxNfy3zRm5eXkuGfqJaHqYmKEEdCMt3StFebbHDoPtj-pA/viewform?usp=publish-editor"
+             class="btn btn-light-solid">Go to submission form</a>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq">
+        <div class="section-header">
+          <div class="section-eyebrow">FAQ</div>
+          <h2 class="section-title">Quick questions.</h2>
+          <p class="section-desc">Tap to expand.</p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <span>Do I need advanced software?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a">
+            No. Any design tool you are comfortable with is fine as long as the drawings and images are clear.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <span>Can I join as a team?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a">
+            Yes. Teams and individuals are both welcome. Only one person should submit on behalf of a team.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <span>Can I update my submission?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a">
+            Contact the organisers if you need to revise your submission after sending it.
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section" id="contact">
+        <div class="section-header">
+          <div class="section-eyebrow">SUPPORT</div>
+          <h2 class="section-title">Contact & data use.</h2>
+        </div>
+
+        <div class="block">
+          <p style="font-size:14px;color:var(--text-muted);">
+            Participation is voluntary. Data collected in the registration and submission forms will be used only for
+            administering and evaluating the challenge. It will not be sold or shared with third parties without your consent.
+          </p>
+          <p style="margin-top:6px;font-size:14px;color:var(--text-muted);">
+            For enquiries, email:
+            <a href="mailto:research@cadrightglobalresources.com" style="color:var(--accent);text-decoration:underline;">research@cadrightglobalresources.com</a>
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR – BOOK ADS -->
+    <aside class="right-adbar">
+      <div class="sidebar-title">Book Store</div>
+
+      <div class="ad-list">
+
+        <!-- AD 1 -->
+        <div class="ad-item">
+          <img src="book1.jpg" alt="48 Laws of Architectural Consulting">
+          <div class="ad-title">48 Laws of Architectural Consulting</div>
+          <div class="ad-desc">
+            Powerful principles to structure, price, and grow your architectural consulting practice.
+          </div>
+          <div class="ad-price">NGN 5,000</div>
+          <a href="https://paystack.com/buy/48-laws-of-architectural-consulting-kxrvuf" class="ad-btn">
+            Order Now
+          </a>
+        </div>
+
+        <div class="ad-divider"></div>
+
+        <!-- AD 2 (example – you can change later) -->
+        <div class="ad-item">
+          <img src="book2.jpg" alt="Sustainable Design Playbook">
+          <div class="ad-title">Learning to be an Architect</div>
+          <div class="ad-desc">
+            A concise Guide Through Life and Experiences in Architecture School.
+          </div>
+          <div class="ad-price">2,500</div>
+          <a href="https://paystack.com/buy/learning-to-be-an-architect-ebook" class="ad-btn">
+            Order Now
+          </a>
+        </div>
+
+        <div class="ad-divider"></div>
+
+        <!-- AD 3 -->
+        <div class="ad-item">
+          <img src="book3.jpg" alt="Energy Ratings for Green Buildings">
+          <div class="ad-title">Energy Ratings for Green Buildings</div>
+          <div class="ad-desc">
+            Focus on improved awareness of professionals.
+          </div>
+          <div class="ad-price">Free read</div>
+          <a href="https://www.scribd.com/document/81921568/Energy-Rating-Sytems-for-Green-Buildings" class="ad-btn">
+            Read More
+          </a>
+        </div>
+
+      </div>
+    </aside>
+
+  </div> <!-- end .page-layout -->
 
   <footer>
     Africa-Wide Green Building Research Challenge 1.0 · All Rights Reserved
